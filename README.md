@@ -1,5 +1,5 @@
-# RoR2SotVBlenderScripts
-Repository for Blender Scripts used to fix ripped models from RoR2 post SotV update. 
+# RoR2BlenderScripts
+Repository for Blender Scripts used to fix ripped models from RoR2. 
 
 Thanks to KingEnderBrine for the inital versions of these scripts pre-SotV update and thanks to Nyks for updating the scripts to work with Blender 3.0+
 

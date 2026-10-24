@@ -10,6 +10,7 @@ from mathutils import Vector
 
 bonesOrder = ['Root', 'Hips', 'L_Thigh', 'L_Shin', 'L_Foot', 'L_Toe', 'L_Cannister_Back', 'L_Cannister_Front', 'Spine1', 'Spine2', 'Spine3', 'SpineEnd', 'L_Clav', 'L_Upperarm', 'L_Forearm', 'L_Hand', 'L_Thumb_01', 'L_Thumb_02', 'L_Thumb_03', 'L_Index_01', 'L_Index_02', 'L_Index_03', 'L_Middle_01', 'L_Middle_02', 'L_Middle_03', 'L_Ring_01', 'L_Ring_02', 'L_Ring_03', 'L_Pinky_01', 'L_Pinky_02', 'L_Pinky_03', 'R_Clav', 'R_Upperarm', 'R_Forearm', 'R_Hand', 'R_Thumb_01', 'R_Thumb_02', 'R_Thumb_03', 'R_Index_01', 'R_Index_02', 'R_Index_03', 'R_Middle_01', 'R_Middle_02', 'R_Middle_03', 'R_Ring_01', 'R_Ring_02', 'R_Ring_03', 'R_Pinky_01', 'R_Pinky_02', 'R_Pinky_03', 'R_WristCloth_01', 'R_WristCloth_02', 'Neck', 'Neck1', 'Head', 'HeadTube_01', 'HeadTube_02', 'Pack', 'PackTube_01', 'PackTube_02', 'Cloth01', 'Cloth02', 'Cloth03', 'R_Thigh', 'R_Shin', 'R_Foot', 'R_Toe', 'TassleMain', 'Tassle_Back_01', 'Tassle_Back_02', 'Tassle_Front_01', 'Tassle_Front_02', 'Belt_01', 'Belt_02', 'Belt_03', 'Belt_04', 'Belt_05']
 srcArmName = 'Armature'
+targetArmName = 'SeekerArmature'
 srcMeshName = 'meshSeekerBody'
 
 meshOffset = None # Vector((1, 1, 1))
@@ -235,7 +236,10 @@ def FinalizePose(srcArmName, applyRestToPose = False):
         modifier.object = storedModifiersInfo[obj.name]
         modifier.use_vertex_groups = True
 
-def Finalize():
+def Finalize(srcArmName, targetArmName):
+    srcArm = bpy.data.objects[srcArmName]
+    srcArm.name = targetArmName
+    srcArm.data.name = targetArmName
     for obj in bpy.data.objects:
         bpy.ops.object.transform_apply(location = True, scale = False, rotation = True)
 
@@ -248,4 +252,4 @@ PrepareBones(bonesOrder, srcArmName)
 FinalizeBones(bonesOrder, srcArmName)
 FinalizeMeshes(meshParentBones)
 FinalizePose(srcArmName, applyRestToPose)
-Finalize()
+Finalize(srcArmName, targetArmName)

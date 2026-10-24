@@ -11,6 +11,7 @@ from mathutils import Vector
 bonesOrder = ['ROOT', 'IKFootTarget.r', 'IKFootPole.r', 'IKFootTarget.l', 'IKFootPole.l', 'base', 'hip', 'thigh.r', 'calf.r', 'mainWheel.r', 'JiggleHandle.Leg.r', 'extraCalf.r', 'extraWheel.r', 'thigh.l', 'calf.l', 'mainWheel.l', 'JiggleHandle.Leg.l', 'extraCalf.l', 'extraWheel.l', 'JiggleHandle.Hip', 'stomach', 'chest', 'neckSpin', 'neckJoint.1', 'neckJoint.2', 'head', 'JiggleHandle.Head', 'JiggleHat', 'JiggleDrawer', 'upper_arm.r', 'lower_arm.r', 'hand.r', 'thumb.1.r', 'thumb.2.r', 'finger.1.1.r', 'finger.1.2.r', 'finger.2.1.r', 'finger.2.2.r', 'upper_arm.l', 'lower_arm.l', 'toolbase', 'nailgun.base', 'nailgun.barrel', 'nailgun.spinner', 'JiggleHandle.Nailgun', 'speargun.base', 'speargun.arm.1.1', 'speargun.arm.1.2', 'speargun.arm.2.1', 'speargun.arm.2.2', 'speargun.spear', 'grenade.base', 'saw.base', 'saw.spinner', 'JiggleHandle.ToolArm', 'RackandPinion', 'IKHeadTarget', 'IKHeadPole', 'IKArmTarget.r', 'IKArmPole.r', 'IKArmTarget.l', 'IKArmPole.l', 'IKTargetExtraWheel.r', 'IKTargetExtraWheel.l']
 
 srcArmName = 'Armature'
+targetArmName = 'ToolbotArmature'
 srcMeshName = 'ToolbotMesh'
 
 meshOffset = None # Vector((1, 1, 1))
@@ -236,7 +237,10 @@ def FinalizePose(srcArmName, applyRestToPose = False):
         modifier.object = storedModifiersInfo[obj.name]
         modifier.use_vertex_groups = True
 
-def Finalize():
+def Finalize(srcArmName, targetArmName):
+    srcArm = bpy.data.objects[srcArmName]
+    srcArm.name = targetArmName
+    srcArm.data.name = targetArmName
     for obj in bpy.data.objects:
         bpy.ops.object.transform_apply(location = True, scale = False, rotation = True)
 
@@ -249,4 +253,4 @@ PrepareBones(bonesOrder, srcArmName)
 FinalizeBones(bonesOrder, srcArmName)
 FinalizeMeshes(meshParentBones)
 FinalizePose(srcArmName, applyRestToPose)
-Finalize()
+Finalize(srcArmName, targetArmName)

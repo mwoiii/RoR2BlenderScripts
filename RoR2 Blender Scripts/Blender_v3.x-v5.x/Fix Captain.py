@@ -10,6 +10,7 @@ from mathutils import Vector
 
 bonesOrder = ['ROOT', 'base', 'stomach', 'chest', 'clavicle.l', 'upper_arm.l', 'lower_arm.l', 'hand.l', 'neck', 'head', 'antenna.1.l', 'antenna.2.l', 'antenna.1.r', 'antenna.2.r', 'clavicle.r', 'upper_arm.r', 'lower_arm.r', 'hand.r', 'finger1.1.r', 'finger1.2.r', 'finger1.3.r', 'finger2.1.r', 'finger2.2.r', 'finger2.3.r', 'finger3.1.r', 'finger3.2.r', 'finger3.3.r', 'finger4.1.r', 'finger4.2.r', 'finger4.3.r', 'thumb.1.r', 'thumb.2.r', 'GripControl.r', 'finger1IKTarget.r', 'finger2IKTarget.r', 'finger3IKTarget.r', 'finger4IKTarget.r', 'thumbIKTarget.r', 'coatjiggle.1.1.l', 'coatjiggle.1.2.l', 'coatjiggle.2.1.l', 'coatjiggle.2.2.l', 'coatjiggle.1.1.r', 'coatjiggle.1.2.r', 'coatjiggle.2.1.r', 'coatjiggle.2.2.r', 'pelvis', 'thigh.l', 'calf.l', 'foot.l', 'toe.l', 'thigh.r', 'calf.r', 'foot.r', 'toe.r', 'IKArmTarget.l', 'IKArmTarget.r', 'IKArmPole.l', 'IKArmPole.r', 'IKLegPole.l', 'IKLegPole.r', 'HeelRoll.l', 'ToeRoll.l', 'FootRoll.l', 'IKLegTarget.l', 'ToeControl.l', 'IKToe.l', 'IKFoot.l', 'HeelRoll.r', 'ToeRoll.r', 'FootRoll.r', 'IKLegTarget.r', 'ToeControl.r', 'IKToe.r', 'IKFoot.r']
 srcArmName = 'Armature'
+targetArmName = 'CaptainArmature'
 srcMeshName = 'Captain'
 
 meshOffset = None # Vector((1, 1, 1))
@@ -231,7 +232,10 @@ def FinalizePose(srcArmName, applyRestToPose = False):
         modifier.object = storedModifiersInfo[obj.name]
         modifier.use_vertex_groups = True
 
-def Finalize():
+def Finalize(srcArmName, targetArmName):
+    srcArm = bpy.data.objects[srcArmName]
+    srcArm.name = targetArmName
+    srcArm.data.name = targetArmName
     for obj in bpy.data.objects:
         bpy.ops.object.transform_apply(location = True, scale = False, rotation = True)
 
@@ -262,6 +266,6 @@ PrepareBones(bonesOrder, srcArmName)
 FinalizeBones(bonesOrder, srcArmName)
 FinalizeMeshes(meshParentBones)
 FinalizePose(srcArmName, applyRestToPose)
-Finalize()
+Finalize(srcArmName, targetArmName)
 if not scaleOnPrepare:
     ScaleMeshes(srcMeshName, meshesScale, meshSpecificScale)

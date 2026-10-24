@@ -12,6 +12,7 @@ bonesOrder = ['god_M_root_jnt', 'spine_M_cog_jnt', 'spine_M_01_jnt', 'spine_M_02
 
 
 srcArmName = 'Armature'
+targetArmName = 'Armature'
 srcMeshName = 'Harvester_Body'
 
 meshOffset = None # Vector((1, 1, 1))
@@ -235,7 +236,10 @@ def FinalizePose(srcArmName, applyRestToPose = False):
         modifier.object = storedModifiersInfo[obj.name]
         modifier.use_vertex_groups = True
 
-def Finalize():
+def Finalize(srcArmName, targetArmName):
+    srcArm = bpy.data.objects[srcArmName]
+    srcArm.name = targetArmName
+    srcArm.data.name = targetArmName
     for obj in bpy.data.objects:
         bpy.ops.object.transform_apply(location = True, scale = False, rotation = True)
 
@@ -248,4 +252,4 @@ PrepareBones(bonesOrder, srcArmName)
 FinalizeBones(bonesOrder, srcArmName)
 FinalizeMeshes(meshParentBones)
 FinalizePose(srcArmName, applyRestToPose)
-Finalize()
+Finalize(srcArmName, targetArmName)

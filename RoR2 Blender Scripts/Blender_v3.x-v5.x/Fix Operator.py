@@ -10,6 +10,7 @@ from mathutils import Vector
 bonesOrder = ['ROOT','drone_center_M','drone_R','drone_eye_R_eye','drone_L','drone_eye_L_eye','base','stomach','spine','spine2','chest','clavicleL','upper_armL','lower_armL','handL','finger_thumb_L','finger_thumb_L_01','finger_thumb_L_02','finger_pointer_L','finger_pointer_L_01','finger_pointer_L_02','finger_pointer_L_03','finger_middle_L','finger_middle_L_01','finger_middle_L_02','finger_middle_L_03','weapon_hand_M','weapon_postion_M','weapon_rotation_M','weapon_M','finger_ring_L','finger_ring_L_01','finger_ring_L_02','finger_ring_L_03','finger_pinkie_L','finger_pinkie_L_01','finger_pinkie_L_02','finger_pinkie_L_03','arm_L_lwrTwist00','arm_L_lwrTwist01','arm_L_lwrTwist02','arm_L_uprTwist00','arm_L_uprTwist01','arm_L_uprTwist02','backpack_M','backpack_knob1_M','backpack_knob2_M','lower_antenna_L','lower_antenna_L_01','lower_antenna_L_02','lower_antenna_L_03','lower_antenna_L_04','clavicle_robot_R','arm_robot_R_shldr','arm_robot_R_elbow','arm_robot_R_wrist','claw_spinner_M','claw_wire_M','claw_M','claw_spin_M','finger_ring_R','finger_ring_R_01','finger_ring_R_02','finger_pointer_R','finger_pointer_R_01','finger_pointer_R_02','finger_pinky_R','finger_pinky_R_01','finger_pinky_R_02','finger_middle_R','finger_middle_R_01','finger_middle_R_02','arm_robot_R_lwrTwist00','arm_robot_R_lwrTwist01','arm_robot_R_lwrTwist02','arm_robot_R_uprTwist00','arm_robot_R_uprTwist01','arm_robot_R_uprTwist02','upper_antenna_L','upper_antenna_L_01','upper_antenna_L_02','upper_antenna_L_03','upper_antenna_L_04','upper_antenna_L_05','backpack_hook_base_M','wire_M_eye','backpack_wire_hook_M','clavicleR','neck','head','eye_big_R_eye','eye_big_L_eye','eye_big_side_R_eye','eye_small_R_eye','eye_small_upper_R_eye','eye_big_side_L_eye','eye_small_L_eye','eye_small_upper_L_eye','pelvis','thighL','calfL','footL','toeL','leg_L_lwrTwist00','leg_L_lwrTwist01','leg_L_lwrTwist02','leg_L_uprTwist00','leg_L_uprTwist01','leg_L_uprTwist02','thighR','calfR','footR','toeR','leg_R_lwrTwist00','leg_R_lwrTwist01','leg_R_lwrTwist02','leg_R_uprTwist00','leg_R_uprTwist01','leg_R_uprTwist02']
 
 srcArmName = 'Armature'
+targetArmName = 'Armature'
 srcMeshName = 'DroneTech_Body'
 
 meshOffset = None # Vector((1, 1, 1))
@@ -231,7 +232,10 @@ def FinalizePose(srcArmName, applyRestToPose = False):
         modifier.object = storedModifiersInfo[obj.name]
         modifier.use_vertex_groups = True
 
-def Finalize():
+def Finalize(srcArmName, targetArmName):
+    srcArm = bpy.data.objects[srcArmName]
+    srcArm.name = targetArmName
+    srcArm.data.name = targetArmName
     for obj in bpy.data.objects:
         bpy.ops.object.transform_apply(location = True, scale = False, rotation = True)
 
@@ -244,4 +248,4 @@ PrepareBones(bonesOrder, srcArmName)
 FinalizeBones(bonesOrder, srcArmName)
 FinalizeMeshes(meshParentBones)
 FinalizePose(srcArmName, applyRestToPose)
-Finalize()
+Finalize(srcArmName, targetArmName)

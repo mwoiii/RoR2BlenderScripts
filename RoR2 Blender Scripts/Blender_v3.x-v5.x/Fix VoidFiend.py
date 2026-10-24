@@ -10,6 +10,7 @@ from mathutils import Vector
 
 bonesOrder = ['ROOT', 'IKTarget.Hand.r', 'IKPole.Hand.R', 'IKTarget.Hand.l', 'IKPole.Hand.l', 'base', 'Stomach', 'Chest', 'Neck', 'Head', 'Shoulder.l', 'Upperarm.l', 'Forearm.l', 'Hand', 'Index1', 'Index2', 'Index3', 'IndexEnd', 'Middle1', 'Middle2', 'Middle3', 'MiddleEnd', 'Ring1', 'Ring2', 'Ring3', 'RingEnd', 'Pinky1', 'Pinky2', 'PinkyEnd', 'Thumb1', 'Thumb2', 'ThumbEnd', 'ForearmExhaust', 'Shoulderpad1', 'Shoulderpad2', 'Shoulder.r', 'Upperarm.r', 'Forearm.r', 'CannonEnd', 'Elbow.r', 'LargeExhaust1.l', 'LargeExhaust2.l', 'SmallExhaust.l', 'LargeExhaust1.r', 'LargeExhaust2.r', 'SmallExhaust.r', 'Backjet.l', 'Backjet.r', 'Pelvis', 'Thigh.l', 'Calf.l', 'Foot.l', 'Toe.l', 'Thigh.r', 'Calf.r', 'Foot.r', 'Toe.r', 'IKPole.Ankle.l', 'IKPole.Ankle.r', 'FootControl.r', 'IKTarget.Ankle.r', 'IKTarget.Foot.r', 'ToeControl.r', 'IKTarget.Toe.r', 'IKPole.Toe.r', 'FootControl.l', 'IKTarget.Ankle.l', 'IKTarget.Foot.l', 'ToeControl.l', 'IKTarget.Toe.l', 'IKPole.Toe.l', 'IKPole.Toe.l']
 srcArmName = 'Armature'
+targetArmName = 'VoidSurvivorArmature'
 srcMeshName = 'mdlVoidSurvivorBody'
 
 meshOffset = Vector((0, 0, 0)) # Vector((1, 1, 1))
@@ -235,7 +236,10 @@ def FinalizePose(srcArmName, applyRestToPose = False):
         modifier.object = storedModifiersInfo[obj.name]
         modifier.use_vertex_groups = True
 
-def Finalize():
+def Finalize(srcArmName, targetArmName):
+    srcArm = bpy.data.objects[srcArmName]
+    srcArm.name = targetArmName
+    srcArm.data.name = targetArmName
     for obj in bpy.data.objects:
         bpy.ops.object.transform_apply(location = True, scale = False, rotation = True)
 
@@ -248,4 +252,4 @@ PrepareBones(bonesOrder, srcArmName)
 FinalizeBones(bonesOrder, srcArmName)
 FinalizeMeshes(meshParentBones)
 FinalizePose(srcArmName, applyRestToPose)
-Finalize()
+Finalize(srcArmName, targetArmName)

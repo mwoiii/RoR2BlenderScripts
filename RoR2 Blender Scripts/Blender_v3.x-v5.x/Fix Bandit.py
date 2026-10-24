@@ -10,6 +10,7 @@ from mathutils import Vector
 
 bonesOrder = ['ROOT', 'base', 'stomach', 'chest', 'clavicle.l', 'upper_arm.l', 'lower_arm.l', 'hand.l', 'finger4.1.l', 'finger4.2.l', 'finger4.3.l', 'thumb.1.l', 'thumb.2.l', 'finger3.1.l', 'finger3.2.l', 'finger3.3.l', 'finger2.1.l', 'finger2.2.l', 'finger2.3.l', 'finger1.1.l', 'finger1.2.l', 'finger1.3.l', 'head', 'hat', 'clavicle.r', 'upper_arm.r', 'lower_arm.r', 'hand.r', 'finger4.1.r', 'finger4.2.r', 'finger4.3.r', 'thumb.1.r', 'thumb.2.r', 'finger3.1.r', 'finger3.2.r', 'finger3.3.r', 'finger2.1.r', 'finger2.2.r', 'finger2.3.r', 'finger1.1.r', 'finger1.2.r', 'finger1.3.r', 'coatjiggle.1.1', 'coatjiggle.1.2', 'coatjiggle.1.3', 'coatjiggle.1.4', 'coatjiggle.2.1.r', 'coatjiggle.2.2.r', 'coatjiggle.2.3.r', 'coatjiggle.2.4.r', 'coatjiggle.3.1.r', 'coatjiggle.3.2.r', 'coatjiggle.3.3.r', 'coatjiggle.3.4.r', 'coatjiggle.2.1.l', 'coatjiggle.2.2.l', 'coatjiggle.2.3.l', 'coatjiggle.2.4.l', 'coatjiggle.3.1.l', 'coatjiggle.3.2.l', 'coatjiggle.3.3.l', 'coatjiggle.3.4.l', 'pelvis', 'thigh.l', 'calf.l', 'foot.l', 'toe.l', 'thigh.r', 'calf.r', 'foot.r', 'toe.r', 'IKArmTarget.l', 'IKArmPole.l', 'IKArmTarget.r', 'IKArmPole.r', 'MainWeapon', 'WeaponHandPlacement.r', 'WeaponHandPlacement.l', 'HeelRoll.l', 'ToeRoll.l', 'FootRoll.l', 'IKLegTarget.l', 'ToeControl.l', 'IKToe.l', 'IKFoot.l', 'IKLegPole.l', 'HeelRoll.r', 'ToeRoll.r', 'FootRoll.r', 'IKLegTarget.r', 'ToeControl.r', 'IKToe.r', 'IKFoot.r', 'IKLegPole.r', 'WeaponHandControl.r', 'WeaponHandControl.l', 'SideWeapon', 'SideWeaponSpinner']
 srcArmName = 'Armature'
+targetArmName = 'BanditArmature'
 srcMeshName = 'Bandit2BodyMesh'
 
 meshOffset = None#Vector((0,0,-0.1246846)) # Vector((1, 1, 1))
@@ -254,10 +255,12 @@ def FinalizePose(srcArmName):
         modifier.object = storedModifiersInfo[obj.name]
         modifier.use_vertex_groups = True
 
-def Finalize(srcArmName):
+def Finalize(srcArmName, targetArmName):
     srcArm = bpy.data.objects[srcArmName]
+    srcArm.name = targetArmName
+    srcArm.data.name = targetArmName
     for obj in bpy.data.objects:
-        if not (obj.parent == srcArm and obj.parent_type == 'BONE'):            
+        if not (obj.parent == srcArm and obj.parent_type == 'BONE'):
             if bpy.app.version[0] > 3:
                 with bpy.context.temp_override(selected_editable_objects=obj):
                     bpy.ops.object.transform_apply(location = True, scale = False, rotation = True)
@@ -273,4 +276,4 @@ PrepareBones(bonesOrder, srcArmName, bonesParentOverride, bonesTailToHeadOverrid
 FinalizeBones(bonesOrder, srcArmName)
 FinalizeMeshes(meshParentBones)
 FinalizePose(srcArmName)
-Finalize(srcArmName)
+Finalize(srcArmName, targetArmName)

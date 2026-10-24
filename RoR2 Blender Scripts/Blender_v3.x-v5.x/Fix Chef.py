@@ -10,6 +10,7 @@ from mathutils import Vector
 
 bonesOrder = ['Root_M', 'Wheel_M', 'RootPart1_M', 'RootPart2_M', 'Spine1_M', 'Chest_M', 'Neck_M', 'Head_M', 'HeadEnd_M', 'hat_jnt', 'mustache_l_jnt00', 'mustache_l_jnt01', 'mustache_r_jnt00', 'mustache_r_jnt01', 'Eye_L', 'Eye_L1', 'Eye_L2', 'Eye_R', 'Eye_R1', 'Eye_R2', 'Scapula_R', 'Shoulder_R', 'ShoulderPart1_R', 'ShoulderPart2_R', 'Elbow_R', 'ElbowPart1_R', 'ElbowPart2_R', 'Wrist_R', 'MiddleFinger1_R', 'MiddleFinger2_R', 'MiddleFinger3_R', 'MiddleFinger4_R', 'ThumbFinger1_R', 'ThumbFinger2_R', 'ThumbFinger3_R', 'ThumbFinger4_R', 'pizzaCuter_jnt', 'blade_jnt', 'Scapula_L', 'Shoulder_L', 'ShoulderPart1_L', 'ShoulderPart2_L', 'Elbow_L', 'ElbowPart1_L', 'ElbowPart2_L', 'Wrist_L', 'MiddleFinger1_L', 'MiddleFinger2_L', 'MiddleFinger3_L', 'MiddleFinger4_L', 'ThumbFinger1_L', 'ThumbFinger2_L', 'ThumbFinger3_L', 'ThumbFinger4_L', 'axe_jnt', 'ovenDoor_jnt', 'backPack_jnt', 'cleaver.003', 'cleaver.001', 'cleaver.002', 'point_chestFollow']
 srcArmName = 'Armature'
+targetArmName = 'root'
 srcMeshName = 'meshChef'
 
 meshOffset = None # Vector((1, 1, 1))
@@ -235,7 +236,10 @@ def FinalizePose(srcArmName, applyRestToPose = False):
         modifier.object = storedModifiersInfo[obj.name]
         modifier.use_vertex_groups = True
 
-def Finalize():
+def Finalize(srcArmName, targetArmName):
+    srcArm = bpy.data.objects[srcArmName]
+    srcArm.name = targetArmName
+    srcArm.data.name = targetArmName
     for obj in bpy.data.objects:
         bpy.ops.object.transform_apply(location = True, scale = False, rotation = True)
 
@@ -248,4 +252,4 @@ PrepareBones(bonesOrder, srcArmName)
 FinalizeBones(bonesOrder, srcArmName)
 FinalizeMeshes(meshParentBones)
 FinalizePose(srcArmName, applyRestToPose)
-Finalize()
+Finalize(srcArmName, targetArmName)

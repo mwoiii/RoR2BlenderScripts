@@ -11,6 +11,7 @@ from mathutils import Vector
 bonesOrder = ['ROOT', 'base', 'hip', 'thigh.l', 'calf.l', 'foot.l', 'thumbtoe.l', 'heelToBall.l', 'ballToToe.l', 'toe1.l', 'toe2.l', 'toe3.l', 'tail1', 'tail2', 'tail3', 'thigh.r', 'calf.r', 'foot.r', 'thumbtoe.r', 'heelToBall.r', 'ballToToe.r', 'toe1.r', 'toe2.r', 'toe3.r', 'stomach', 'chest', 'neck.1', 'neck.2', 'neck.3', 'head', 'jaw', 'tongue.1', 'tongue.2', 'tongue.3', 'tongue.4', 'eyelid.1.l', 'eyelid.2.l', 'eyelid.1.r', 'eyelid.2.r', 'clavicle.l', 'upper_arm.l', 'lower_arm.l', 'hand.l', 'finger1.1.l', 'finger1.2.l', 'finger1.3.l', 'thumb.1.l', 'thumb.2.l', 'finger2.1.l', 'finger2.2.l', 'finger2.3.l', 'finger3.1.l', 'finger3.2.l', 'finger3.3.l', 'chain.1.l', 'chain.2.l', 'chain.3.l', 'clavicle.r', 'upper_arm.r', 'lower_arm.r', 'hand.r', 'finger1.1.r', 'finger1.2.r', 'finger1.3.r', 'thumb.1.r', 'thumb.2.r', 'finger2.1.r', 'finger2.2.r', 'finger2.3.r', 'finger3.1.r', 'finger3.2.r', 'finger3.3.r', 'chain.1.r', 'chain.2.r', 'chain.3.r', 'Spine.Chest.1', 'Spine.Chest.2', 'Spine.Chest.3', 'Spine.Stomach.1', 'Spine.Stomach.2', 'IKNeckTarget', 'IKNeckPole', 'IKHandTarget.r', 'IKHandPole.r', 'IKHandTarget.l', 'IKHandPole.l', 'ToeControl.l', 'HeelControl.l', 'IKFootTarget.l', 'IKFootPole.l', 'ToeControl.r', 'HeelControl.r', 'IKFootTarget.r', 'IKFootPole.r']
 
 srcArmName = 'Armature'
+targetArmName = 'CrocoArmature'
 srcMeshName = 'CrocoMesh'
 
 meshOffset = None # Vector((1, 1, 1))
@@ -233,7 +234,10 @@ def FinalizePose(srcArmName, applyRestToPose = False):
         modifier.object = storedModifiersInfo[obj.name]
         modifier.use_vertex_groups = True
 
-def Finalize():
+def Finalize(srcArmName, targetArmName):
+    srcArm = bpy.data.objects[srcArmName]
+    srcArm.name = targetArmName
+    srcArm.data.name = targetArmName
     for obj in bpy.data.objects:
         bpy.ops.object.transform_apply(location = True, scale = False, rotation = True)
 
@@ -246,4 +250,4 @@ PrepareBones(bonesOrder, srcArmName)
 FinalizeBones(bonesOrder, srcArmName)
 FinalizeMeshes(meshParentBones)
 FinalizePose(srcArmName, applyRestToPose)
-Finalize()
+Finalize(srcArmName, targetArmName)

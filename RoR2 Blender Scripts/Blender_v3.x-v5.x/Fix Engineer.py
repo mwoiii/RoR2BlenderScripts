@@ -11,6 +11,7 @@ from mathutils import Vector
 bonesOrder = ['ROOT', 'base', 'stomach', 'chest', 'upper_arm.l', 'lower_arm.l', 'hand.l', 'finger1IKBender.l', 'finger1IKTarget.l', 'finger2IKBender.l', 'finger2IKTarget.l', 'finger3IKBender.l', 'finger3IKTarget.l', 'finger4IKBender.l', 'finger4IKTarget.l', 'thumbIKBender.l', 'thumbIKTarget.l', 'finger1.1.l', 'finger1.2.l', 'finger1.3.l', 'finger2.1.l', 'finger2.2.l', 'finger2.3.l', 'finger3.1.l', 'finger3.2.l', 'finger3.3.l', 'finger4.1.l', 'finger4.2.l', 'finger4.3.l', 'thumb.1.l', 'thumb.2.l', 'upper_arm.r', 'lower_arm.r', 'hand.r', 'finger1IKBender.r', 'finger1IKTarget.r', 'finger2IKBender.r', 'finger2IKTarget.r', 'finger3IKBender.r', 'finger3IKTarget.r', 'finger4IKBender.r', 'finger4IKTarget.r', 'thumbIKBender.r', 'thumbIKTarget.r', 'finger1.1.r', 'finger1.2.r', 'finger1.3.r', 'finger2.1.r', 'finger2.2.r', 'finger2.3.r', 'finger3.1.r', 'finger3.2.r', 'finger3.3.r', 'finger4.1.r', 'finger4.2.r', 'finger4.3.r', 'thumb.1.r', 'thumb.2.r', 'cannonJoint1.l', 'cannonJoint2.l', 'cannonHead.l', 'cannonJoint1.r', 'cannonJoint2.r', 'cannonHead.r', 'pelvis', 'thigh.l', 'calf.l', 'foot.l', 'toe.l', 'thigh.r', 'calf.r', 'foot.r', 'toe.r', 'IKArmTarget.l', 'IKArmPole.l', 'IKArmTarget.r', 'IKArmPole.r', 'IKLegTarget.l', 'IKLegPole.l', 'IKLegTarget.r', 'IKLegPole.r', 'cannonIKTarget.l', 'cannonIKTarget.r']
 
 srcArmName = 'Armature'
+targetArmName = 'EngiArmature'
 srcMeshName = 'EngiMesh'
 
 meshOffset = None # Vector((1, 1, 1))
@@ -236,7 +237,10 @@ def FinalizePose(srcArmName, applyRestToPose = False):
         modifier.object = storedModifiersInfo[obj.name]
         modifier.use_vertex_groups = True
 
-def Finalize():
+def Finalize(srcArmName, targetArmName):
+    srcArm = bpy.data.objects[srcArmName]
+    srcArm.name = targetArmName
+    srcArm.data.name = targetArmName
     for obj in bpy.data.objects:
         bpy.ops.object.transform_apply(location = True, scale = False, rotation = True)
 
@@ -249,4 +253,4 @@ PrepareBones(bonesOrder, srcArmName)
 FinalizeBones(bonesOrder, srcArmName)
 FinalizeMeshes(meshParentBones)
 FinalizePose(srcArmName, applyRestToPose)
-Finalize()
+Finalize(srcArmName, targetArmName)

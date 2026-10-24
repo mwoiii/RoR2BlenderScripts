@@ -11,6 +11,7 @@ from enum import Enum
 bonesOrder = ['ROOT', 'base', 'pelvis', 'thighL', 'calfL', 'footL', 'toeL', 'calfTwistL1', 'calfTwistL2', 'calfTwistL3', 'thighTwistL1', 'thighTwistL2', 'thighTwistL3', 'thighR', 'calfR', 'footR', 'toeR', 'calfTwistR1', 'calfTwistR2', 'calfTwistR3', 'thighTwistR1', 'thighTwistR2', 'thighTwistR3', 'stomach', 'spine', 'chest', 'clavicleL', 'upper_armL', 'lower_armL', 'handL', 'thumb_L', 'thumb_L_1', 'thumb_L_2', 'mid_L', 'mid_L1', 'mid_L2', 'point_L1', 'point_L2', 'point_L3', 'fingerL3', 'fingerL3_1', 'fingerL3_2', 'fingerL3_end', 'shotgun_prop', 'shotgun_prop1', 'shotgun_prop_end', 'fingerL4', 'fingerL4_1', 'fingerL4_2', 'fingerL4_end', 'elbowL_twist1', 'elbowL_twist2', 'elbowL_twist3', 'armL_twist1', 'armL_twist2', 'armL_twist3', 'neck', 'head', 'clavicleR', 'upper_armR', 'lower_armR', 'handR', 'fingerR2', 'fingerR2_1', 'fingerR2_end', 'thumbR', 'thumbR_1', 'thumbR_end', 'shield_M_00_jnt', 'shield_M_01_jnt', 'shield_M_02_jnt', 'fingerR3', 'fingerR3_1', 'fingerR3_2', 'fingerR3_end', 'fingerR1', 'fingerR1_1', 'fingerR1_end', 'fingerR4', 'fingerR4_1', 'fingerR4_2', 'fingerR4_end', 'elbowR_twist1', 'elbowR_twist2', 'elbowR_twist3', 'armR_twist1', 'armR_twist2', 'armR_twist3', 'booster']
     
 srcArmName = 'Armature'
+targetArmName = 'Armature'
 srcMeshName = 'Enforcer_geo'
 
 meshOffset = None # Vector((1, 1, 1))
@@ -426,7 +427,10 @@ def FinalizePose(srcArmName, applyRestToPose = False):
         modifier.object = storedModifiersInfo[obj.name]
         modifier.use_vertex_groups = True
 
-def Finalize():
+def Finalize(srcArmName, targetArmName):
+    srcArm = bpy.data.objects[srcArmName]
+    srcArm.name = targetArmName
+    srcArm.data.name = targetArmName
     for obj in bpy.data.objects:
         bpy.ops.object.transform_apply(location = True, scale = False, rotation = True)
 
@@ -438,6 +442,6 @@ PrepareBones(bonesOrder, srcArmName)
 FinalizeBones(bonesOrder, srcArmName)
 FinalizeMeshes(meshParentBones)
 FinalizePose(srcArmName, applyRestToPose)
-Finalize()
+Finalize(srcArmName, targetArmName)
 if generateVisualisationScripts:
-    ApplyVisualFixes(srcArmName)
+    ApplyVisualFixes(targetArmName)

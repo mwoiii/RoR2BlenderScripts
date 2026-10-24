@@ -10,6 +10,7 @@ from mathutils import Vector
 bonesOrder = ['root','base','stomach','spine','chest','scapula_r','shoulder_r','elbow_r','wrist_r','finger2_1_r','finger2_2_r','finger2_3_r','finger2_4_r_end','thumb1_r','thumb2_r','thumb3_r','thumb4_r_end','finger1_1_r','finger1_2_r','finger1_3_r','finger1_4_r_end','finger3_1_r','finger3_2_r','finger3_3_r','finger3_4_r','neck','head','head_end','tassel1_r','tassel2_r','tassel3_r_end','tassel1_l','tassel2_l','tassel3_l_end','scapula_l','shoulder_l','elbow_l','wirst_l','finger2_1_l','finger2_2_l','finger2_3_l','finger2_4_l_end','thumb1_l','thumb2_l','thumb3_l','thumb4_l','finger1_1_l','finger1_2_l','finger1_3_l','finger1_4_l_end','finger3_1_l','finger3_2_l','finger3_3_l','finger3_4_l_end','pelvis','hip_r','hip_r_end','knee_r','ankle_r','toes_r','toes_r_end','coatA_r','coatA_r_end','coatB_r','coatB_r_end','coat_m','coat_m_end','hip_l','hip_l_end','knee_l','ankle_l','toes_l','toes_l_end','coatA_l','coatA_l_end','coatB_l','coatB_l_end','bagMaster_l','strapA01_l','strapA01_l_end','strapA02_l','strapA02_l_end','bagCurve_l','bagCurve_l_end','bag01_l','bag02_l','bag03_l','strapD02_l','strapD02_l_end','strapD01_l','strapD01_l_end','bag04_l','bagBulk_l','bagBulk_l_end','bagBulgeBt_l','bagBulgeBt_l_end','bagPocketRt_l','bagPocketRt_l_end','bagBulgeRt_l','bagBulgeRt_l_end','bagBulgeLf_l','bagBulgeLf_l_end','bagPocketLf_l','bagPocketLf_l_end','bagFlap1_l','bagFlap2_l','bagFlap3_l','strapC02_l','strapC02_l_end','strapC01_l','strapC01_l_end','strapB01_l','strapB01_l_end','strapB02_l','strapB02_l_end','bag01D_l','bagBt01_l','bagBt02_l','junk','item']
 
 srcArmName = 'Armature'
+targetArmName = 'DrifterArmature'
 srcMeshName = 'meshDrifter'
 
 meshOffset = None # Vector((1, 1, 1))
@@ -234,7 +235,10 @@ def FinalizePose(srcArmName, applyRestToPose = False):
         modifier.object = storedModifiersInfo[obj.name]
         modifier.use_vertex_groups = True
 
-def Finalize():
+def Finalize(srcArmName, targetArmName):
+    srcArm = bpy.data.objects[srcArmName]
+    srcArm.name = targetArmName
+    srcArm.data.name = targetArmName
     for obj in bpy.data.objects:
         bpy.ops.object.transform_apply(location = True, scale = False, rotation = True)
 
@@ -247,4 +251,4 @@ PrepareBones(bonesOrder, srcArmName)
 FinalizeBones(bonesOrder, srcArmName)
 FinalizeMeshes(meshParentBones)
 FinalizePose(srcArmName, applyRestToPose)
-Finalize()
+Finalize(srcArmName, targetArmName)

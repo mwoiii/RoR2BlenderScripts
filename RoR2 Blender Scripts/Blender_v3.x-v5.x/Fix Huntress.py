@@ -17,6 +17,7 @@ extraArmOffset = Vector((-0.15413, 0.880586, 0.704945))
 extraArmRotation = (radians(-33.4912), radians(6.73003), radians(21.3605))
 
 srcArmName = 'Armature'
+targetArmName = 'HuntressArmature'
 srcMeshName = 'HuntressMesh'
 
 meshOffset = None # Vector((1, 1, 1))
@@ -245,7 +246,10 @@ def FinalizePose(srcArmName, applyRestToPose = False):
         modifier.object = storedModifiersInfo[obj.name]
         modifier.use_vertex_groups = True
 
-def Finalize():
+def Finalize(srcArmName, targetArmName):
+    srcArm = bpy.data.objects[srcArmName]
+    srcArm.name = targetArmName
+    srcArm.data.name = targetArmName
     for obj in bpy.data.objects:
         bpy.ops.object.transform_apply(location = True, scale = False, rotation = True)
 
@@ -327,4 +331,4 @@ PrepareBones(bonesOrder, srcArmName)
 FinalizeBones(bonesOrder, srcArmName)
 FinalizeMeshes(meshParentBones, srcArmName)
 FinalizePose(srcArmName, applyRestToPose)
-Finalize()
+Finalize(srcArmName, targetArmName)

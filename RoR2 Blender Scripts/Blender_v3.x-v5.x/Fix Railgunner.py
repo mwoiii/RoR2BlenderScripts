@@ -10,6 +10,7 @@ from mathutils import Vector
 
 bonesOrder = ['ROOT', 'base', 'stomach', 'chest', 'clavicle.l', 'upper_arm.l', 'lower_arm.l', 'hand.l', 'finger1.1.l', 'finger1.2.l', 'finger1.3.l', 'finger1.3.l_end', 'finger2.1.l', 'finger2.2.l', 'finger2.3.l', 'finger2.3.l_end', 'finger3.1.l', 'finger3.2.l', 'finger3.3.l', 'finger3.3.l_end', 'finger4.1.l', 'finger4.2.l', 'finger4.3.l', 'finger4.3.l_end', 'thumb.1.l', 'thumb.2.l', 'thumb.2.l_end', 'neck', 'head', 'hood1', 'hood2', 'hood2_end', 'clavicle.r', 'upper_arm.r', 'lower_arm.r', 'hand.r', 'finger1.1.r', 'finger1.2.r', 'finger1.3.r', 'finger1.3.r_end', 'finger2.1.r', 'finger2.2.r', 'finger2.3.r', 'finger2.3.r_end', 'finger3.1.r', 'finger3.2.r', 'finger3.3.r', 'finger3.3.r_end', 'finger4.1.r', 'finger4.2.r', 'finger4.3.r', 'finger4.3.r_end', 'thumb.1.r', 'thumb.2.r', 'thumb.2.r_end', 'scarf1', 'scarf2', 'scarf2_end', 'backpack', 'battery.r', 'battery.r_end', 'battery.l', 'battery.l_end', 'hinge.l', 'hinge.l_end', 'hinge.r', 'hinge.r_end', 'battery2.r', 'battery2.r_end', 'battery3.r', 'battery3.r_end', 'battery4.r', 'battery4.r_end', 'battery2.l', 'battery2.l_end', 'battery3.l', 'battery3.l_end', 'battery4.l', 'battery4.l_end', 'backpackstrap', 'backpackstrap_end', 'pelvis', 'thigh.l', 'calf.l', 'foot.l', 'toe.l', 'toe.l_end', 'thigh.r', 'calf.r', 'foot.r', 'toe.r', 'toe.r_end', 'belt.r', 'belt.center', 'belt.l', 'belt.l_end', 'satchel2', 'satchel2_end', 'satchel1', 'satchel1_end', 'GunRoot', 'Stock', 'Stock_end', 'GunBarrel', 'GunEnd', 'TopRailSlider', 'TopRail', 'TopRail_end', 'BottomRailSlider', 'BottomRail', 'BottomRail_end', 'SMG', 'SMGScope1', 'SMGScope1_end', 'SMGScope2', 'SMGScope2_end', 'SMGBarrel', 'SMGBarrel_end', 'GunScope', 'GunScope_end', 'GripIK.r', 'HandleIK.r', 'HandleIK.r_end', 'GripIK.l', 'HandleIK.l', 'HandleIK.l_end', 'IKArmPole.l', 'IKArmPole.l_end', 'IKLegPole.l', 'IKLegPole.l_end', 'IKLegPole.r', 'IKLegPole.r_end', 'HeelRoll.l', 'ToeRoll.l', 'FootRoll.l', 'IKLegTarget.l', 'IKLegTarget.l_end', 'ToeControl.l', 'IKToe.l', 'IKToe.l_end', 'IKFoot.l', 'IKFoot.l_end', 'HeelRoll.r', 'ToeRoll.r', 'FootRoll.r', 'IKLegTarget.r', 'IKLegTarget.r_end', 'ToeControl.r', 'IKToe.r', 'IKToe.r_end', 'IKFoot.r', 'IKFoot.r_end', 'IKArmPole.r', 'IKArmPole.r_end']
 srcArmName = 'Armature'
+targetArmName = 'RailGunnerArmature'
 srcMeshName = 'mdlRailGunnerBase'
 
 meshOffset = Vector((0, 0.2525915, -0.2234831)) # Vector((1, 1, 1))
@@ -235,7 +236,10 @@ def FinalizePose(srcArmName, applyRestToPose = False):
         modifier.object = storedModifiersInfo[obj.name]
         modifier.use_vertex_groups = True
 
-def Finalize():
+def Finalize(srcArmName, targetArmName):
+    srcArm = bpy.data.objects[srcArmName]
+    srcArm.name = targetArmName
+    srcArm.data.name = targetArmName
     for obj in bpy.data.objects:
         bpy.ops.object.transform_apply(location = True, scale = False, rotation = True)
 
@@ -248,4 +252,4 @@ PrepareBones(bonesOrder, srcArmName)
 FinalizeBones(bonesOrder, srcArmName)
 FinalizeMeshes(meshParentBones)
 FinalizePose(srcArmName, applyRestToPose)
-Finalize()
+Finalize(srcArmName, targetArmName)

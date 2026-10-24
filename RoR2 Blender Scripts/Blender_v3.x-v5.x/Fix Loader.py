@@ -10,6 +10,7 @@ from mathutils import Vector
 
 bonesOrder = ['ROOT', 'base', 'stomach', 'chest', 'clavicle.l', 'upper_arm.l', 'lower_arm.l', 'hand.l', 'finger1.1.l', 'finger1.2.l', 'finger1.3.l', 'finger2.1.l', 'finger2.2.l', 'finger2.3.l', 'finger3.1.l', 'finger3.2.l', 'finger3.3.l', 'finger4.1.l', 'finger4.2.l', 'finger4.3.l', 'thumb.1.l', 'thumb.2.l', 'GripControl.l', 'finger1IKTarget.l', 'finger2IKTarget.l', 'finger3IKTarget.l', 'finger4IKTarget.l', 'thumbIKTarget.l', 'neck', 'head', 'mech.base', 'mech.upper_arm.l', 'mech.lower_arm.l', 'mech.handle.l', 'mech.hand.l', 'mech.hand.end.l', 'mech.finger1.1.l', 'mech.finger1.2.l', 'mech.finger1.3.l', 'mech.finger2.1.l', 'mech.finger2.2.l', 'mech.finger2.3.l', 'mech.finger3.1.l', 'mech.finger3.2.l', 'mech.finger3.3.l', 'mech.thumb.1.l', 'mech.thumb.2.l', 'mech.GripControl.l', 'mech.finger1IKTarget.l', 'mech.finger2IKTarget.l', 'mech.finger3IKTarget.l', 'mech.thumbIKTarget.l', 'mech.hydraulictarget.l', 'mech.hydraulic.base.l', 'mech.hydraulic.piston.l', 'mech.upper_arm.r', 'mech.lower_arm.r', 'mech.handle.r', 'mech.hand.r', 'mech.hand.end.r', 'mech.finger1.1.r', 'mech.finger1.2.r', 'mech.finger1.3.r', 'mech.finger2.1.r', 'mech.finger2.2.r', 'mech.finger2.3.r', 'mech.finger3.1.r', 'mech.finger3.2.r', 'mech.finger3.3.r', 'mech.thumb.1.r', 'mech.thumb.2.r', 'mech.GripControl.r', 'mech.finger1IKTarget.r', 'mech.finger2IKTarget.r', 'mech.finger3IKTarget.r', 'mech.thumbIKTarget.r', 'mech.hydraulictarget.r', 'mech.hydraulic.base.r', 'mech.hydraulic.piston.r', 'clavicle.r', 'upper_arm.r', 'lower_arm.r', 'hand.r', 'finger1.1.r', 'finger1.2.r', 'finger1.3.r', 'finger2.1.r', 'finger2.2.r', 'finger2.3.r', 'finger3.1.r', 'finger3.2.r', 'finger3.3.r', 'finger4.1.r', 'finger4.2.r', 'finger4.3.r', 'thumb.1.r', 'thumb.2.r', 'GripControl.r', 'finger1IKTarget.r', 'finger2IKTarget.r', 'finger3IKTarget.r', 'finger4IKTarget.r', 'thumbIKTarget.r', 'pelvis', 'thigh.l', 'calf.l', 'foot.l', 'toe.l', 'thigh.r', 'calf.r', 'foot.r', 'toe.r', 'IKArmTarget.l', 'IKArmPole.l', 'mech.IKArmTarget.l', 'mech.IKArmPole.l', 'IKArmTarget.r', 'IKArmPole.r', 'mech.IKArmTarget.r', 'mech.IKArmPole.r', 'HeelRoll.l', 'ToeRoll.l', 'FootRoll.l', 'IKLegTarget.l', 'ToeControl.l', 'IKToe.l', 'IKFoot.l', 'IKLegPole.l', 'HeelRoll.r', 'ToeRoll.r', 'FootRoll.r', 'IKLegTarget.r', 'ToeControl.r', 'IKToe.r', 'IKFoot.r', 'IKLegPole.r']
 srcArmName = 'Armature'
+targetArmName = 'LoaderArmature'
 srcMeshName = 'LoaderMechMesh'
 
 meshOffset = Vector((0, 1.3, 0)) # Vector((1, 1, 1))
@@ -234,7 +235,10 @@ def FinalizePose(srcArmName, applyRestToPose = False):
         modifier.object = storedModifiersInfo[obj.name]
         modifier.use_vertex_groups = True
 
-def Finalize():
+def Finalize(srcArmName, targetArmName):
+    srcArm = bpy.data.objects[srcArmName]
+    srcArm.name = targetArmName
+    srcArm.data.name = targetArmName
     for obj in bpy.data.objects:
         bpy.ops.object.transform_apply(location = True, scale = False, rotation = True)
 
@@ -247,4 +251,4 @@ PrepareBones(bonesOrder, srcArmName)
 FinalizeBones(bonesOrder, srcArmName)
 FinalizeMeshes(meshParentBones)
 FinalizePose(srcArmName, applyRestToPose)
-Finalize()
+Finalize(srcArmName, targetArmName)

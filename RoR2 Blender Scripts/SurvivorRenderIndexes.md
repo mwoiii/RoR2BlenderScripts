@@ -1,6 +1,45 @@
 ### It is ill-advised to reference renderers by index, as these are subject to change in game updates. Prefer renderer names where possible, which are less likely to change. 
 
 -------------------------------
+### AcolyteBody
+| Index | Type | Name (Body) | Name (Display) |
+| - | - | - | - |
+| 0 | UnityEngine.SkinnedMeshRenderer | acolyte_eyes | acolyte_eyes |
+| 1 | UnityEngine.SkinnedMeshRenderer | acolyte_geo | acolyte_geo |
+| 2 | UnityEngine.SkinnedMeshRenderer | Acolyte_Weapon_geo | Acolyte_Weapon_geo |
+| 3 | UnityEngine.SkinnedMeshRenderer | Harvester_Weapon_blade | Harvester_Weapon_blade |
+| 4 | UnityEngine.SkinnedMeshRenderer | Harvester_Weapon_low| Harvester_Weapon_low |
+| 5 | UnityEngine.SkinnedMeshRenderer | left_arm | horns |
+| 6 | UnityEngine.SkinnedMeshRenderer | horns | left_arm |
+| 7 | UnityEngine.SkinnedMeshRenderer | right_arm | right_arm |
+| 8 | UnityEngine.SkinnedMeshRenderer | acolyte_eyes |
+| 9 | UnityEngine.SkinnedMeshRenderer | acolyte_geo |
+| 10 | UnityEngine.SkinnedMeshRenderer | Acolyte_Weapon_geo |
+| 11 | UnityEngine.SkinnedMeshRenderer | Harvester_Weapon_blade |
+| 12 | UnityEngine.SkinnedMeshRenderer | Harvester_Weapon_low |
+| 13 | UnityEngine.SkinnedMeshRenderer | left_arm |
+| 14 | UnityEngine.SkinnedMeshRenderer | horns |
+| 15 | UnityEngine.SkinnedMeshRenderer | right_arm |
+| 16 | UnityEngine.MeshRenderer | SlashHitbox |
+| 17 | UnityEngine.MeshRenderer | ScytheHitBoxVisualizer |
+| 18 | UnityEngine.SkinnedMeshRenderer | cyrstals |
+| 19 | UnityEngine.SkinnedMeshRenderer | Harvester_Body |
+| 20 | UnityEngine.SkinnedMeshRenderer | Harvester_Head_False |
+| 21 | UnityEngine.SkinnedMeshRenderer | Harvester_Head_False_Eyes |
+| 22 | UnityEngine.SkinnedMeshRenderer | Harvester_Head_Main |
+| 23 | UnityEngine.SkinnedMeshRenderer | Harvester_Head_Main_Eyes |
+| 24 | UnityEngine.SkinnedMeshRenderer | Harvester_Weapon |
+| 25 | UnityEngine.SkinnedMeshRenderer | Harvester_Weapon_blade |
+| 26 | UnityEngine.SkinnedMeshRenderer | horns |
+| 27 | UnityEngine.SkinnedMeshRenderer | inner_cloak |
+| 28 | UnityEngine.SkinnedMeshRenderer | ring |
+| 29 | UnityEngine.ParticleSystemRenderer | Symbol |
+| 30 | UnityEngine.MeshRenderer | Hitbox |
+| 31 | UnityEngine.MeshRenderer | Hitbox |
+| 32 | UnityEngine.MeshRenderer | Hitbox (1) |
+| 33 | UnityEngine.MeshRenderer | Hitbox (2) |
+
+-------------------------------
 ### Bandit2Body
 | Index | Type | Name |
 | --- | ------------ | ------------|
@@ -26,26 +65,6 @@
 | 4 | UnityEngine.SkinnedMeshRenderer | CaptainGunArm |
 | 5 | UnityEngine.SkinnedMeshRenderer | CaptainHead |
 | 6 | UnityEngine.SkinnedMeshRenderer | CaptainUndercoat |
-
--------------------------------
-### DrifterBody
-| Index | Type | Name |
-| --- | ------------ | ------------|
-| 0 | UnityEngine.MeshRenderer | mdlGroundEnemies |
-| 1 | UnityEngine.SkinnedMeshRenderer | meshBag |
-| 2 | UnityEngine.SkinnedMeshRenderer | meshDrifter |
-| 3 | UnityEngine.SkinnedMeshRenderer | meshJunk |
-
--------------------------------
-### DroneTechBody
-| Index | Type | Name |
-| --- | ------------ | ------------|
-| 0 | UnityEngine.SkinnedMeshRenderer | DroneTech_Body |
-| 1 | UnityEngine.SkinnedMeshRenderer | DroneTech_Gun |
-| 2 | UnityEngine.SkinnedMeshRenderer | Operator_Glow_01 |
-| 3 | UnityEngine.SkinnedMeshRenderer | Operator_Glow_02 |
-| 4 | UnityEngine.SkinnedMeshRenderer | Operator_Glow_03 |
-| 5 | UnityEngine.SkinnedMeshRenderer | Operator_Glow_04 |
 
 -------------------------------
 ### ChefBody
@@ -75,6 +94,41 @@
 | 1 | UnityEngine.ParticleSystemRenderer | Goo |
 | 2 | UnityEngine.SkinnedMeshRenderer | CrocoMesh |
 | 3 | UnityEngine.SkinnedMeshRenderer | CrocoSpineMesh |
+
+-------------------------------
+### DrifterBody
+| Index | Type | Name |
+| --- | ------------ | ------------|
+| 0 | UnityEngine.MeshRenderer | mdlGroundEnemies |
+| 1 | UnityEngine.SkinnedMeshRenderer | meshBag |
+| 2 | UnityEngine.SkinnedMeshRenderer | meshDrifter |
+| 3 | UnityEngine.SkinnedMeshRenderer | meshJunk |
+
+-------------------------------
+### DroneTechBody
+| Index | Type | Name |
+| --- | ------------ | ------------|
+| 0 | UnityEngine.SkinnedMeshRenderer | DroneTech_Body |
+| 1 | UnityEngine.SkinnedMeshRenderer | DroneTech_Gun |
+| 2 | UnityEngine.SkinnedMeshRenderer | Operator_Glow_01 |
+| 3 | UnityEngine.SkinnedMeshRenderer | Operator_Glow_02 |
+| 4 | UnityEngine.SkinnedMeshRenderer | Operator_Glow_03 |
+| 5 | UnityEngine.SkinnedMeshRenderer | Operator_Glow_04 |
+
+-------------------------------
+### Enforcer2Body
+| Index | Type | Name |
+| --- | ------------ | ------------|
+| 0 | UnityEngine.SkinnedMeshRenderer | Enforcer_geo |
+| 1 | UnityEngine.SkinnedMeshRenderer | FootLights |
+| 2 | UnityEngine.MeshRenderer | ActiveVisual |
+| 3 | UnityEngine.MeshRenderer | Edge |
+| 4 | UnityEngine.SkinnedMeshRenderer | Enforcer_Gun_low |
+| 5 | UnityEngine.SkinnedMeshRenderer | Enforcer_Shield_low |
+| 6 | UnityEngine.SkinnedMeshRenderer | ShoulderLights |
+| 7 | UnityEngine.ParticleSystemRenderer | Falling VFX |
+| 8 | UnityEngine.ParticleSystemRenderer | Falling VFX (1) |
+| 9 | UnityEngine.MeshRenderer | KineticChargeShieldModel |
 
 -------------------------------
 ### EngiBody
@@ -164,6 +218,33 @@
 | 8 | UnityEngine.SkinnedMeshRenderer | MercSwordMesh |
 
 -------------------------------
+### RailgunnerBody
+| Index | Type | Name |
+| --- | ------------ | ------------|
+| 0 | UnityEngine.SkinnedMeshRenderer | mdlRailgunBackpackMesh |
+| 1 | UnityEngine.SkinnedMeshRenderer | mdlRailGunBackpackScreen |
+| 2 | UnityEngine.SkinnedMeshRenderer | mdlRailGunnerBase |
+| 3 | UnityEngine.SkinnedMeshRenderer | mdlRailGunnerMetal |
+| 4 | UnityEngine.SkinnedMeshRenderer | mdlRailgunProto |
+| 5 | UnityEngine.ParticleSystemRenderer | StatusLED, Rail |
+| 6 | UnityEngine.ParticleSystemRenderer | StatusLED, Rail |
+| 7 | UnityEngine.ParticleSystemRenderer | PowerLED, Barrel |
+| 8 | UnityEngine.LineRenderer | SMGLaser |
+| 9 | UnityEngine.ParticleSystemRenderer | StatusLED, Backpack |
+| 10 | UnityEngine.ParticleSystemRenderer | PowerLED, Barrel |
+| 11 | UnityEngine.MeshRenderer | Monitor, Charging |
+| 12 | UnityEngine.MeshRenderer | Monitor, Charging |
+| 13 | UnityEngine.ParticleSystemRenderer | SequentialFlashes, Burst |
+| 14 | UnityEngine.ParticleSystemRenderer | SequentialFlashes, Loop |
+| 15 | UnityEngine.ParticleSystemRenderer | Sparks, Out |
+| 16 | UnityEngine.MeshRenderer | Monitor, Charged |
+| 17 | UnityEngine.ParticleSystemRenderer | Sparks |
+| 18 | UnityEngine.ParticleSystemRenderer | Steam, Local |
+| 19 | UnityEngine.ParticleSystemRenderer | Steam, World |
+| 20 | UnityEngine.ParticleSystemRenderer | SequentialFlashes, Burst |
+| 21 | UnityEngine.MeshRenderer | Monitor, Reboot |
+
+-------------------------------
 ### SeekerBody
 | Index | Type | Name |
 | --- | ------------ | ------------|
@@ -193,33 +274,6 @@
 | 4 | UnityEngine.ParticleSystemRenderer | Debris |
 | 5 | UnityEngine.ParticleSystemRenderer | Dust |
 | 6 | UnityEngine.ParticleSystemRenderer | Roots |
-
--------------------------------
-### RailgunnerBody
-| Index | Type | Name |
-| --- | ------------ | ------------|
-| 0 | UnityEngine.SkinnedMeshRenderer | mdlRailgunBackpackMesh |
-| 1 | UnityEngine.SkinnedMeshRenderer | mdlRailGunBackpackScreen |
-| 2 | UnityEngine.SkinnedMeshRenderer | mdlRailGunnerBase |
-| 3 | UnityEngine.SkinnedMeshRenderer | mdlRailGunnerMetal |
-| 4 | UnityEngine.SkinnedMeshRenderer | mdlRailgunProto |
-| 5 | UnityEngine.ParticleSystemRenderer | StatusLED, Rail |
-| 6 | UnityEngine.ParticleSystemRenderer | StatusLED, Rail |
-| 7 | UnityEngine.ParticleSystemRenderer | PowerLED, Barrel |
-| 8 | UnityEngine.LineRenderer | SMGLaser |
-| 9 | UnityEngine.ParticleSystemRenderer | StatusLED, Backpack |
-| 10 | UnityEngine.ParticleSystemRenderer | PowerLED, Barrel |
-| 11 | UnityEngine.MeshRenderer | Monitor, Charging |
-| 12 | UnityEngine.MeshRenderer | Monitor, Charging |
-| 13 | UnityEngine.ParticleSystemRenderer | SequentialFlashes, Burst |
-| 14 | UnityEngine.ParticleSystemRenderer | SequentialFlashes, Loop |
-| 15 | UnityEngine.ParticleSystemRenderer | Sparks, Out |
-| 16 | UnityEngine.MeshRenderer | Monitor, Charged |
-| 17 | UnityEngine.ParticleSystemRenderer | Sparks |
-| 18 | UnityEngine.ParticleSystemRenderer | Steam, Local |
-| 19 | UnityEngine.ParticleSystemRenderer | Steam, World |
-| 20 | UnityEngine.ParticleSystemRenderer | SequentialFlashes, Burst |
-| 21 | UnityEngine.MeshRenderer | Monitor, Reboot |
 
 -------------------------------
 ### VoidSurvivorBody
